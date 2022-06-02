@@ -10,8 +10,7 @@ public class Livro {
 
 	@Override
 	public String toString() {
-		return "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", pagLidas=" + pagLidas
-				+ ", ano=" + ano + "]";
+		return "Título - " + titulo + " | Autor - " + autor + " | Paginas - " + paginas + " | Páginas lidas - " + pagLidas + " | Ano de lançamento - " + ano;
 	}
 
 	public Livro(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
@@ -30,10 +29,12 @@ public class Livro {
 	public String getTitulo() {
 		return titulo;
 	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	
+	public void modificarAno(Integer ano) {
+		this.ano = ano;
 	}
+
+
 
 	public Integer porcentagemLido() {
 		return  (this.getPagLidas() * 100) / this.getPaginas();

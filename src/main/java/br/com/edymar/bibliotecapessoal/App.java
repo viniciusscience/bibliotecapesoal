@@ -14,15 +14,20 @@ public class App {
 	}
 
 	private static void menu() {
-		Integer opcao;
+		Integer opcao = 5;
 		do {
-			opcao = Integer.parseInt(JOptionPane.showInputDialog("MENU"
-					+ "\n1-Cadastrar Livro"
-					+ "\n2-Editar Livro"
-					+ "\n3-Mostrar todos os livros"
-					+ "\n4-Porcentagem de leitura dos livros"
-					+ "\n5-Sair"));
-			escolheOpcao(opcao);
+			try {
+				opcao = Integer.parseInt(JOptionPane.showInputDialog("MENU"
+						+ "\n1-Cadastrar Livro"
+						+ "\n2-Editar Livro"
+						+ "\n3-Mostrar todos os livros"
+						+ "\n4-Porcentagem de leitura dos livros"
+						+ "\n5-Sair"));
+				escolheOpcao(opcao);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Você deve digitar uma opção válida.");
+				opcao = 0;
+			}
 		} while (opcao != 5);
 		
 	}
@@ -37,7 +42,8 @@ public class App {
 			break;
 		case 4: porcentagemLeitura();
 			break;
-		default:
+		case 5: mostrarLivros();
+		porcentagemLeitura();
 			break;
 		}
 	}
@@ -63,8 +69,10 @@ public class App {
 				JOptionPane.showMessageDialog(null, "O número de páginas lidas não pode ser maior que o de páginas do livro.");
 			}else if (pagLidas < 0) {
 				JOptionPane.showMessageDialog(null, "O número de páginas lidas não pode ser menor que 0.");
+			}else {
+				break;
 			}
-		} while (pagLidas > paginas || pagLidas < 0);
+		} while (true);
 		ano = Integer.parseInt(JOptionPane.showInputDialog("Ano de publicação: "));
 		Livro livro = new Livro(titulo, autor, paginas, pagLidas, ano);
 		livros.add(livro);
@@ -154,47 +162,52 @@ public class App {
 		Integer ano;
 		if (livro != null) {
 			ano = Integer.parseInt(JOptionPane.showInputDialog("Digite um novo ano de lançamento para " + livro.getTitulo()));
-					
-		}
-		
+			livro.modificarAno(ano);			
+		}		
 	}
 	
 	//MOSTAR INFORMAÇÕES
 	private static void mostrarLivros() {
-		livros.forEach(livro -> {
+		String mensagem = "";
+		for (Livro livro : livros) {
 			if (livro != null) {
-				JOptionPane.showMessageDialog(null, livro.toString());
+				mensagem += livro.toString() + "\n";
 			}else {
 				JOptionPane.showMessageDialog(null, "Você ainda não cadastrou nenhum livro.");
-			}			
-		});	
+			}	
+		}
+		if (!mensagem.equals("")) {
+			JOptionPane.showMessageDialog(null, mensagem);
+		}		
 	}
 	
 	private static void porcentagemLeitura() {
-		
-		livros.forEach(livro -> {
-			String barra = "";
+		String percent = "";
+		for (Livro livro : livros) {			
+			percent += livro.getTitulo() + " ";
 			for (int i = 0; i < livro.porcentagemLido(); i += 5) {				
-				barra += "*";				
+				percent += "*";				
 			}
-			JOptionPane.showMessageDialog(null, livro.getTitulo() + " " + barra + " " + livro.porcentagemLido() + "%");
-		});
-		
+			percent += " " + livro.porcentagemLido() + "%\n"; 
+		}
+		if (!percent.equals("")) {
+			JOptionPane.showMessageDialog(null, percent);
+		}		
 	}
 	
 	//BUSCAR ALGUM LIVRO
-	private static Livro buscarLivro() {
-		String titulo = JOptionPane.showInputDialog("Qual livro você quer acrescentar páginas?");
+	private static Livro buscarLivro() {		
 		Livro livro = null;
 		try {
 			if (livros.get(0) != null) {
+				String titulo = JOptionPane.showInputDialog("Qual livro?");
 				for (Livro l : livros) {
-					if (l.getTitulo().equalsIgnoreCase(titulo)) {
+					if (l.getTitulo().replace(" ", "").equalsIgnoreCase(titulo.replace(" ", ""))) {
 						livro = l;
-					}else {
-						JOptionPane.showMessageDialog(null, "Livro não encontrado.");
 					}		
 				}
+			}if (livro == null) {
+				JOptionPane.showMessageDialog(null, "livro não encontrado.");
 			}
 		}catch (Exception e) {			
 				JOptionPane.showMessageDialog(null, "Você ainda não cadastrou nenhum livro.");
