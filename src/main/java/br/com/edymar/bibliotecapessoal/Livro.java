@@ -10,7 +10,7 @@ public class Livro {
 
 	@Override
 	public String toString() {
-		return "Livro [titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", pagLidas=" + pagLidas
+		return "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", pagLidas=" + pagLidas
 				+ ", ano=" + ano + "]";
 	}
 
@@ -22,12 +22,21 @@ public class Livro {
 		this.ano = ano;
 	}
 
-	public static void acrescentaPaginas(String titulo, Integer paginas) {
+	public void acrescentaPaginas(Integer pag) {
+		this.pagLidas += pag;
 		
 	}
 
-	private Integer porcentagemLido() {
-		return (this.getPaginas() / this.getPagLidas()) * 100;
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Integer porcentagemLido() {
+		return  (this.getPagLidas() * 100) / this.getPaginas();
 	}
 
 	public Integer getPagLidas() {
@@ -40,5 +49,14 @@ public class Livro {
 
 	public Boolean isLido() {
 		return paginas.equals(pagLidas);
+	}
+
+	public void modificarTitulo(String titulo) {
+		this.titulo = titulo;		
+	}
+
+	public void modificarAutor(String autor) {
+		this.autor = autor;
+		
 	}
 }
