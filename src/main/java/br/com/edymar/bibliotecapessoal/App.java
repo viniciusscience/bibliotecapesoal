@@ -202,7 +202,7 @@ public class App {
 			if (livros.get(0) != null) {
 				String titulo = JOptionPane.showInputDialog("Qual livro?");
 				for (Livro l : livros) {
-					if (l.getTitulo().replace(" ", "").equalsIgnoreCase(titulo.replace(" ", ""))) {
+					if (l.getTitulo().equalsIgnoreCase(titulo)) {
 						livro = l;
 					}		
 				}
