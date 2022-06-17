@@ -1,4 +1,4 @@
-package br.com.triersistemas.pessoalbiblioteca.exceptions;
+package br.com.triersistemas.bibliotecapessoal.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

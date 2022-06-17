@@ -1,33 +1,38 @@
-package br.com.triersistemas.pessoalbiblioteca.repository.impl;
+package br.com.triersistemas.bibliotecapessoal.repository.impl;
 
-import br.com.triersistemas.pessoalbiblioteca.domain.Livro;
-import br.com.triersistemas.pessoalbiblioteca.repository.LivroRepository;
+import br.com.triersistemas.bibliotecapessoal.domain.Livro;
+import br.com.triersistemas.bibliotecapessoal.repository.LivroRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class LivroRepositoryImpl implements LivroRepository {
 
     private static final List<Livro> LIST = new ArrayList<>();
 
     @Override
     public List<Livro> consultar() {
-        return null;
+        return LIST;
     }
 
     @Override
-    public Livro consultar(UUID id) {
-        return null;
+    public Optional<Livro> consultar(UUID id) {
+        return LIST.stream()
+                .filter(l -> l.getId().equals(id))
+                .findFirst();
     }
 
     @Override
-    public Livro cadastrar(Livro livro) {
-        return null;
+    public void cadastrar(Livro livro) {
+        LIST.add(livro);;
     }
 
     @Override
-    public Livro excluir(Livro livro) {
-        return null;
+    public void excluir(Livro livro) {
+        LIST.remove(livro);
     }
 }

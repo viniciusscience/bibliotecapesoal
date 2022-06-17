@@ -1,11 +1,12 @@
-package br.com.triersistemas.pessoalbiblioteca.controller;
+package br.com.triersistemas.bibliotecapessoal.controller;
 
-import br.com.triersistemas.pessoalbiblioteca.domain.Livro;
-import br.com.triersistemas.pessoalbiblioteca.exceptions.LivroNaoEncontradoException;
-import br.com.triersistemas.pessoalbiblioteca.model.LivroModel;
+import br.com.triersistemas.bibliotecapessoal.domain.Livro;
+import br.com.triersistemas.bibliotecapessoal.model.LivroModel;
+import br.com.triersistemas.bibliotecapessoal.model.PagLidasModel;
+import br.com.triersistemas.bibliotecapessoal.service.LivroService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,81 +14,36 @@ import java.util.UUID;
 @RequestMapping("/livro")
 public class LivroController {
 
-    private static final List<Livro> LIVROS = new ArrayList<>();
-
-    @PostMapping("/cadastrar")
-    public Livro cadastrar(@RequestBody LivroModel model) {
-        var livro = new Livro(model.getTitulo(), model.getAutor(),
-                model.getPaginas(), model.getPagLidas(), model.getAno());
-        LIVROS.add(livro);
-        return livro;
-    }
-
-    @PutMapping("/editar-titulo/{id}")
-    public Livro editarTitulo(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.alteraTitulo(model.getTitulo());
-        return livro;
-    }
-
-    @PutMapping("/editar-autor/{id}")
-    public Livro editarAutor(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.alteraAutor(model.getAutor());
-        return livro;
-    }
-
-    @PutMapping("/editar-paginas/{id}")
-    public Livro editarPaginas(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.alteraPaginas(model.getPaginas());
-        return livro;
-    }
-
-    @PutMapping("/editar-paglidas/{id}")
-    public Livro editarPagLidas(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.alteraPagLidas(model.getPagLidas());
-        return livro;
-    }
-
-    @PutMapping("/editar-ano/{id}")
-    public Livro editarLivro(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.alteraAno(model.getAno());
-        return livro;
-    }
-
-    @PutMapping("/adicionar-paglidas/{id}")
-    public Livro adicionarPagLidas(@PathVariable UUID id, @RequestBody LivroModel model) {
-        var livro = buscaLivro(id);
-        livro.acrescentaPaginas(model.getPagLidas());
-        return livro;
-    }
+    @Autowired
+    private LivroService livroService;
 
     @GetMapping("/consultar")
     public List<Livro> consultar() {
-        return LIVROS;
+        return livroService.consultar();
     }
 
     @GetMapping("/pesquisalivro/{id}")
-    public Livro pesquisaLivro(@PathVariable UUID id){
-        return buscaLivro(id);
+    public Livro consultar(@PathVariable UUID id) {
+        return livroService.consultar(id);
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public Livro deletar(@PathVariable UUID id) {
-        var livro = buscaLivro(id);
-        LIVROS.remove(livro);
-        return livro;
+    @PostMapping("/cadastrar")
+    public Livro cadastrar(@PathVariable UUID id, @RequestBody LivroModel model) {
+        return livroService.cadastrar(model);
     }
 
-
-    public Livro buscaLivro(UUID id) {
-        return LIVROS.stream()
-                .filter(l -> l.getId().equals(id))
-                .findFirst()
-                .orElseThrow(LivroNaoEncontradoException::new);
+    @PutMapping("/editar/{id}")
+    public Livro editar(@PathVariable UUID id, @RequestBody LivroModel model) {
+        return livroService.editar(id, model);
     }
 
+    @PutMapping("/adicionar-paglidas/{id}")
+    public Livro adicionarPagLidas(@PathVariable UUID id, @RequestBody PagLidasModel model) {
+        return livroService.adicionarPagLidas(id, model);
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public Livro excluir(@PathVariable UUID id) {
+        return livroService.excluir(id);
+    }
 }

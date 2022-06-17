@@ -1,4 +1,4 @@
-package br.com.triersistemas.pessoalbiblioteca.exceptions;
+package br.com.triersistemas.bibliotecapessoal.exceptions;
 
 public class PaginasLidasException extends LivroIndefinivelException{
 

@@ -1,4 +1,4 @@
-package br.com.triersistemas.pessoalbiblioteca.helper;
+package br.com.triersistemas.bibliotecapessoal.helper;
 
 import javax.swing.*;
 

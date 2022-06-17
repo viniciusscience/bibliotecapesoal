@@ -1,9 +1,9 @@
-package br.com.triersistemas.pessoalbiblioteca.domain;
+package br.com.triersistemas.bibliotecapessoal.domain;
 
-import br.com.triersistemas.pessoalbiblioteca.enuns.EnumStatusLeitura;
-import br.com.triersistemas.pessoalbiblioteca.exceptions.PaginasLidasException;
-import br.com.triersistemas.pessoalbiblioteca.exceptions.PaginasLivroException;
-import br.com.triersistemas.pessoalbiblioteca.helper.StringUtils;
+import br.com.triersistemas.bibliotecapessoal.enuns.EnumStatusLeitura;
+import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLidasException;
+import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLivroException;
+import br.com.triersistemas.bibliotecapessoal.helper.StringUtils;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class Livro {
         this.leitura = statusLeitura();
     }
 
-    public Livro editar(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano){
+    public Livro editar(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
         this.titulo = titulo;
         this.autor = autor;
         this.paginas = verificaPaginas(paginas, pagLidas);
@@ -53,34 +53,12 @@ public class Livro {
         return pagLidas;
     }
 
-
-
     public Livro acrescentaPaginas(Integer paginas) {
         if (!(paginas < 0)) {
             this.pagLidas = verificaPagLidas(this.pagLidas + paginas, this.paginas);
             this.leitura = statusLeitura();
         }
         return this;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public Integer getPaginas() {
-        return this.paginas;
-    }
-
-    public Integer getPagLidas() {
-        return this.pagLidas;
-    }
-
-    public Integer getAno() {
-        return ano;
     }
 
     public StringBuilder getPorcentagemLido() {

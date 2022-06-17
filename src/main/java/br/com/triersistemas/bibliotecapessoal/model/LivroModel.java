@@ -1,4 +1,4 @@
-package br.com.triersistemas.pessoalbiblioteca.model;
+package br.com.triersistemas.bibliotecapessoal.model;
 
 import lombok.Getter;
 
@@ -10,4 +10,5 @@ public class LivroModel {
     private Integer paginas;
     private Integer pagLidas;
     private Integer ano;
+
 }
