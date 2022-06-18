@@ -42,7 +42,7 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     @Override
     public LivroDesejo alterar(UUID id, LivroDesejoModel model) {
         LivroDesejo livroDesejo = this.consultar(id);
-        livroDesejo.editar(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getAno());
+        livroDesejo.editar(model.getTitulo(), model.getAutor(), model.getPaginas(), 0, model.getAno());
         return livroDesejo;
     }
 

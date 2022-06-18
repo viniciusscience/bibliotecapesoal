@@ -10,28 +10,22 @@ import lombok.Getter;
 public class LivroObtido extends Livro{
 
     private Integer pagLidas;
-
     private EnumStatusLeitura leitura;
 
     public LivroObtido(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
-        super(titulo, autor, paginas, ano);
+        super(titulo, autor, paginas, pagLidas, ano);
         this.pagLidas = verificaPagLidas(pagLidas, paginas);
         this.leitura = statusLeitura();
     }
 
     public LivroObtido editar(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
-        super.editar(titulo, autor, paginas, ano);
+        super.editar(titulo, autor, paginas, pagLidas, ano);
         this.pagLidas = verificaPagLidas(pagLidas, paginas);
         this.leitura = statusLeitura();
         return this;
     }
 
-    public Integer verificaPaginas(Integer paginas, Integer pagLidas) throws PaginasLivroException {
-        if (paginas < 2 || paginas < pagLidas) {
-            throw new PaginasLivroException();
-        }
-        return paginas;
-    }
+
 
     public Integer verificaPagLidas(Integer pagLidas, Integer paginas) throws PaginasLidasException {
         if (pagLidas < 0 || pagLidas > paginas) {

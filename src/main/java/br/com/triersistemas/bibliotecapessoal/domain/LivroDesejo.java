@@ -12,13 +12,13 @@ public class LivroDesejo extends Livro{
     private List<Loja> lojas;
 
     public LivroDesejo(String titulo, String autor, Integer paginas, Integer ano) {
-        super(titulo, autor, paginas, ano);
+        super(titulo, autor, paginas, 0, ano);
         this.lojas = new ArrayList<>();
     }
 
 
     protected LivroDesejo editar(String titulo, String autor, Integer paginas, Integer ano, BigDecimal preco, String loja) {
-        super.editar(titulo, autor, paginas, ano);
+        super.editar(titulo, autor, paginas, 0, ano);
         return this;
     }
 
