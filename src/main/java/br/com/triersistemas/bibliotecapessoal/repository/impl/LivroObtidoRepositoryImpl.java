@@ -1,7 +1,7 @@
 package br.com.triersistemas.bibliotecapessoal.repository.impl;
 
-import br.com.triersistemas.bibliotecapessoal.domain.Livro;
-import br.com.triersistemas.bibliotecapessoal.repository.LivroRepository;
+import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
+import br.com.triersistemas.bibliotecapessoal.repository.LivroObtidoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,29 +10,29 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class LivroRepositoryImpl implements LivroRepository {
+public class LivroObtidoRepositoryImpl implements LivroObtidoRepository {
 
-    private static final List<Livro> LIST = new ArrayList<>();
+    private static final List<LivroObtido> LIST = new ArrayList<>();
 
     @Override
-    public List<Livro> consultar() {
+    public List<LivroObtido> consultar() {
         return LIST;
     }
 
     @Override
-    public Optional<Livro> consultar(UUID id) {
+    public Optional<LivroObtido> consultar(UUID id) {
         return LIST.stream()
                 .filter(l -> l.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public void cadastrar(Livro livro) {
+    public void cadastrar(LivroObtido livro) {
         LIST.add(livro);;
     }
 
     @Override
-    public void excluir(Livro livro) {
+    public void excluir(LivroObtido livro) {
         LIST.remove(livro);
     }
 }
