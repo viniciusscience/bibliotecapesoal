@@ -1,6 +1,7 @@
 package br.com.triersistemas.bibliotecapessoal.controller;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
+import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.model.ExcluiLojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
 import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
@@ -27,25 +28,30 @@ public class LivroDesejoController {
     public LivroDesejo consultar(@PathVariable UUID id){
         return livroDesejoService.consultar(id);
     }
+
     @PostMapping("/cadastrar")
     public LivroDesejo cadastrar(@RequestBody LivroDesejoModel model){
         return livroDesejoService.cadastrar(model);
     }
-    @PutMapping("/alterar/{id}")
-    public LivroDesejo alterar(@PathVariable UUID id, @RequestBody LivroDesejoModel model){
-        return livroDesejoService.alterar(id, model);
+    @PutMapping("/editar/{id}")
+    public LivroDesejo editar(@PathVariable UUID id, @RequestBody LivroDesejoModel model){
+        return livroDesejoService.editar(id, model);
     }
     @PutMapping("/adicionar-loja/{id}")
     public LivroDesejo adicionarLoja(@PathVariable UUID id, @RequestBody LojaModel model){
         return livroDesejoService.adicionarLoja(id, model);
     }
-    @PutMapping("/modifica-loja/{id}")
+    @PutMapping("/modificar-loja/{id}")
     public LivroDesejo modificarLoja(@PathVariable UUID id, @RequestBody ModificaLojaModel model){
         return livroDesejoService.modificarLoja(id, model);
     }
-    @PutMapping("/exclui-loja/{id}")
+    @PutMapping("/excluir-loja/{id}")
     public LivroDesejo excluirLoja(@PathVariable UUID id, @RequestBody ExcluiLojaModel model){
         return livroDesejoService.excluirLoja(id, model);
+    }
+    @DeleteMapping("/livro-obtido/{id}")
+    public LivroDesejo livroObtido(@PathVariable UUID id){
+        return livroDesejoService.livroObtido(id);
     }
     @DeleteMapping("/excluir/{id}")
     public LivroDesejo excluir(@PathVariable UUID id){

@@ -11,6 +11,7 @@ import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.ModificaLojaModel;
 import br.com.triersistemas.bibliotecapessoal.repository.LivroDesejoRepository;
 import br.com.triersistemas.bibliotecapessoal.service.LivroDesejoService;
+import br.com.triersistemas.bibliotecapessoal.service.LivroObtidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
 
     @Autowired
     private LivroDesejoRepository livroDesejoRepository;
+
+    @Autowired
+    private LivroObtidoService livroObtidoService;
 
     @Override
     public List<LivroDesejo> consultar() {
@@ -41,7 +45,7 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     }
 
     @Override
-    public LivroDesejo alterar(UUID id, LivroDesejoModel model) {
+    public LivroDesejo editar(UUID id, LivroDesejoModel model) {
         LivroDesejo livroDesejo = this.consultar(id);
         livroDesejo.editar(model.getTitulo(), model.getAutor(), model.getPaginas(), 0, model.getAno());
         return livroDesejo;
@@ -66,13 +70,22 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
         return livroDesejo;
     }
 
-    public LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model){
+    public LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model) {
         LivroDesejo livroDesejo = this.consultar(id);
         var loja = livroDesejo.getLojas().stream()
                 .filter(l -> l.getId().equals(model.getIdLoja()))
                 .findFirst()
                 .orElseThrow(LojaNaoEcontrada::new);
         livroDesejo.excluirLoja(loja);
+        return livroDesejo;
+    }
+
+    @Override
+    public LivroDesejo livroObtido(UUID id) {
+        LivroDesejo livroDesejo = this.consultar(id);
+        LivroObtido livroObtido = new LivroObtido(livroDesejo.getTitulo(), livroDesejo.getAutor(), livroDesejo.getPaginas(), 0, livroDesejo.getAno());
+        livroObtidoService.cadastrar(livroObtido);
+        livroDesejoRepository.excluir(livroDesejo);
         return livroDesejo;
     }
 

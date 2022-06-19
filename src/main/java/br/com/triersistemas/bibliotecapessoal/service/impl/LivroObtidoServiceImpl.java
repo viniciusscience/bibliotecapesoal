@@ -1,10 +1,13 @@
 package br.com.triersistemas.bibliotecapessoal.service.impl;
 
+import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
 import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.exceptions.LivroNaoEncontradoException;
 import br.com.triersistemas.bibliotecapessoal.model.LivroObtidoModel;
 import br.com.triersistemas.bibliotecapessoal.model.PagLidasModel;
+import br.com.triersistemas.bibliotecapessoal.repository.LivroDesejoRepository;
 import br.com.triersistemas.bibliotecapessoal.repository.LivroObtidoRepository;
+import br.com.triersistemas.bibliotecapessoal.service.LivroDesejoService;
 import br.com.triersistemas.bibliotecapessoal.service.LivroObtidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
 
     @Autowired
     private LivroObtidoRepository livroObtidoRepository;
+
     @Override
     public List<LivroObtido> consultar() {
         return livroObtidoRepository.consultar();
@@ -32,6 +36,11 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
         LivroObtido livro = new LivroObtido(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getPagLidas(), model.getAno());
         livroObtidoRepository.cadastrar(livro);
         return livro;
+    }
+
+    @Override
+    public void cadastrar(LivroObtido livroObtido) {
+        livroObtidoRepository.cadastrar(livroObtido);
     }
 
     @Override

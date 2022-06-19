@@ -1,5 +1,6 @@
 package br.com.triersistemas.bibliotecapessoal.controller;
 
+import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
 import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.model.LivroObtidoModel;
 import br.com.triersistemas.bibliotecapessoal.model.PagLidasModel;
@@ -22,7 +23,7 @@ public class LivroObtidoController {
         return livroObtidoService.consultar();
     }
 
-    @GetMapping("/pesquisalivro/{id}")
+    @GetMapping("/consultar/{id}")
     public LivroObtido consultar(@PathVariable UUID id) {
         return livroObtidoService.consultar(id);
     }
@@ -41,9 +42,9 @@ public class LivroObtidoController {
     public LivroObtido adicionarPagLidas(@PathVariable UUID id, @RequestBody PagLidasModel model) {
         return livroObtidoService.adicionarPagLidas(id, model);
     }
-
     @DeleteMapping("/excluir/{id}")
     public LivroObtido excluir(@PathVariable UUID id) {
         return livroObtidoService.excluir(id);
     }
+
 }

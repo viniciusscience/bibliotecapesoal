@@ -1,5 +1,6 @@
 package br.com.triersistemas.bibliotecapessoal.repository.impl;
 
+import br.com.triersistemas.bibliotecapessoal.domain.Livro;
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
 import br.com.triersistemas.bibliotecapessoal.repository.LivroDesejoRepository;
 import org.springframework.stereotype.Repository;

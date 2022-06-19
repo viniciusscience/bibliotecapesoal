@@ -11,8 +11,8 @@ public interface LivroObtidoService {
     List<LivroObtido> consultar();
     LivroObtido consultar(UUID id);
     LivroObtido cadastrar(LivroObtidoModel model);
+    void cadastrar(LivroObtido livroObtido);
     LivroObtido editar(UUID id, LivroObtidoModel model);
     LivroObtido adicionarPagLidas(UUID id, PagLidasModel model);
-
     LivroObtido excluir(UUID id);
 }
