@@ -5,6 +5,7 @@ import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.exceptions.LivroNaoEncontradoException;
 import br.com.triersistemas.bibliotecapessoal.exceptions.LojaNaoEcontrada;
+import br.com.triersistemas.bibliotecapessoal.model.ExcluiLojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
 import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.ModificaLojaModel;
@@ -58,17 +59,17 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     public LivroDesejo modificarLoja(UUID id, ModificaLojaModel model) {
         LivroDesejo livroDesejo = this.consultar(id);
         var loja = livroDesejo.getLojas().stream()
-                .filter(l -> l.getId().equals(id))
+                .filter(l -> l.getId().equals(model.getIdLoja()))
                 .findFirst()
                 .orElseThrow(LojaNaoEcontrada::new);
         loja.editar(model.getPreco(), model.getNome());
         return livroDesejo;
     }
 
-    public LivroDesejo excluirLoja(UUID id, ModificaLojaModel model){
+    public LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model){
         LivroDesejo livroDesejo = this.consultar(id);
         var loja = livroDesejo.getLojas().stream()
-                .filter(l -> l.getId().equals(id))
+                .filter(l -> l.getId().equals(model.getIdLoja()))
                 .findFirst()
                 .orElseThrow(LojaNaoEcontrada::new);
         livroDesejo.excluirLoja(loja);

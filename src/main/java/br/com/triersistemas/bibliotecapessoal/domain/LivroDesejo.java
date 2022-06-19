@@ -27,7 +27,8 @@ public class LivroDesejo extends Livro{
         return this;
     }
 
-    public void excluirLoja(Loja loja) {
+    public LivroDesejo excluirLoja(Loja loja) {
         this.lojas.remove(loja);
+        return this;
     }
 }
