@@ -29,7 +29,7 @@ public class LivroObtidoController {
     }
 
     @PostMapping("/cadastrar")
-    public LivroObtido cadastrar(@PathVariable UUID id, @RequestBody LivroObtidoModel model) {
+    public LivroObtido cadastrar(@RequestBody LivroObtidoModel model) {
         return livroObtidoService.cadastrar(model);
     }
 
