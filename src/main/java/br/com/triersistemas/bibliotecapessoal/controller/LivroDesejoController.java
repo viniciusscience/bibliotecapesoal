@@ -1,6 +1,7 @@
 package br.com.triersistemas.bibliotecapessoal.controller;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
+import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.model.ExcluiLojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
@@ -50,7 +51,7 @@ public class LivroDesejoController {
         return livroDesejoService.excluirLoja(id, model);
     }
     @DeleteMapping("/livro-obtido/{id}")
-    public LivroDesejo livroObtido(@PathVariable UUID id){
+    public LivroObtido livroObtido(@PathVariable UUID id){
         return livroDesejoService.livroObtido(id);
     }
     @DeleteMapping("/excluir/{id}")

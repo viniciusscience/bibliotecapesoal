@@ -81,12 +81,12 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     }
 
     @Override
-    public LivroDesejo livroObtido(UUID id) {
+    public LivroObtido livroObtido(UUID id) {
         LivroDesejo livroDesejo = this.consultar(id);
         LivroObtido livroObtido = new LivroObtido(livroDesejo.getTitulo(), livroDesejo.getAutor(), livroDesejo.getPaginas(), 0, livroDesejo.getAno());
         livroObtidoService.cadastrar(livroObtido);
         livroDesejoRepository.excluir(livroDesejo);
-        return livroDesejo;
+        return livroObtido;
     }
 
     @Override

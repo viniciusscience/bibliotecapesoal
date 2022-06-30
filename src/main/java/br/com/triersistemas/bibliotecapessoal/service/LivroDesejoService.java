@@ -1,6 +1,7 @@
 package br.com.triersistemas.bibliotecapessoal.service;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
+import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.model.ExcluiLojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
@@ -19,7 +20,7 @@ public interface LivroDesejoService {
     LivroDesejo adicionarLoja(UUID id, LojaModel model);
     LivroDesejo modificarLoja(UUID id, ModificaLojaModel model);
     LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model);
-    LivroDesejo livroObtido(UUID id);
+    LivroObtido livroObtido(UUID id);
     LivroDesejo excluir(UUID id);
 
 
