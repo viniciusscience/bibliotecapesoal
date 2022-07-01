@@ -46,9 +46,9 @@ public class LivroDesejoController {
     public LivroDesejo modificarLoja(@PathVariable UUID id, @RequestBody ModificaLojaModel model){
         return livroDesejoService.modificarLoja(id, model);
     }
-    @PutMapping("/excluir-loja/{id}")
-    public LivroDesejo excluirLoja(@PathVariable UUID id, @RequestBody ExcluiLojaModel model){
-        return livroDesejoService.excluirLoja(id, model);
+    @DeleteMapping("/excluir-loja/{id}/{idLoja}")
+    public LivroDesejo excluirLoja(@PathVariable UUID id, @PathVariable UUID idLoja){
+        return livroDesejoService.excluirLoja(id, idLoja);
     }
     @DeleteMapping("/livro-obtido/{id}")
     public LivroObtido livroObtido(@PathVariable UUID id){

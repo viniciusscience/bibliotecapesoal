@@ -70,10 +70,10 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
         return livroDesejo;
     }
 
-    public LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model) {
+    public LivroDesejo excluirLoja(UUID id, UUID idLoja) {
         LivroDesejo livroDesejo = this.consultar(id);
         var loja = livroDesejo.getLojas().stream()
-                .filter(l -> l.getId().equals(model.getIdLoja()))
+                .filter(l -> l.getId().equals(idLoja))
                 .findFirst()
                 .orElseThrow(LojaNaoEcontrada::new);
         livroDesejo.excluirLoja(loja);

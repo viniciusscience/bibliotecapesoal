@@ -19,7 +19,7 @@ public interface LivroDesejoService {
     LivroDesejo editar(UUID id, LivroDesejoModel model);
     LivroDesejo adicionarLoja(UUID id, LojaModel model);
     LivroDesejo modificarLoja(UUID id, ModificaLojaModel model);
-    LivroDesejo excluirLoja(UUID id, ExcluiLojaModel model);
+    LivroDesejo excluirLoja(UUID id, UUID idLoja);
     LivroObtido livroObtido(UUID id);
     LivroDesejo excluir(UUID id);
 
