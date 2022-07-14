@@ -19,31 +19,31 @@ public class LivroObtidoController {
     private LivroObtidoService livroObtidoService;
 
     @GetMapping("/consultar")
-    public List<LivroObtido> consultar() {
+    public List<LivroObtidoModel> consultar() {
         return livroObtidoService.consultar();
     }
 
     @GetMapping("/consultar/{id}")
-    public LivroObtido consultar(@PathVariable UUID id) {
+    public LivroObtidoModel consultar(@PathVariable UUID id) {
         return livroObtidoService.consultar(id);
     }
 
     @PostMapping("/cadastrar")
-    public LivroObtido cadastrar(@RequestBody LivroObtidoModel model) {
+    public LivroObtidoModel cadastrar(@RequestBody LivroObtidoModel model) {
         return livroObtidoService.cadastrar(model);
     }
 
-    @PutMapping("/editar/{id}")
-    public LivroObtido editar(@PathVariable UUID id, @RequestBody LivroObtidoModel model) {
-        return livroObtidoService.editar(id, model);
+    @PutMapping("/editar")
+    public LivroObtidoModel editar(@RequestBody LivroObtidoModel model) {
+        return livroObtidoService.editar(model);
     }
 
     @PutMapping("/adicionar-paglidas/{id}")
-    public LivroObtido adicionarPagLidas(@PathVariable UUID id, @RequestBody PagLidasModel model) {
+    public LivroObtidoModel adicionarPagLidas(@PathVariable UUID id, @RequestBody PagLidasModel model) {
         return livroObtidoService.adicionarPagLidas(id, model);
     }
     @DeleteMapping("/excluir/{id}")
-    public LivroObtido excluir(@PathVariable UUID id) {
+    public LivroObtidoModel excluir(@PathVariable UUID id) {
         return livroObtidoService.excluir(id);
     }
 

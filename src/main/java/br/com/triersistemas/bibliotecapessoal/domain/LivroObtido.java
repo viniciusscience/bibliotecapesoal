@@ -2,14 +2,21 @@ package br.com.triersistemas.bibliotecapessoal.domain;
 
 import br.com.triersistemas.bibliotecapessoal.enuns.EnumStatusLeitura;
 import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLidasException;
-import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLivroException;
 import br.com.triersistemas.bibliotecapessoal.helper.StringUtils;
-import br.com.triersistemas.bibliotecapessoal.model.LivroObtidoModel;
-import lombok.Getter;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "livro_obtido")
+@NoArgsConstructor
 @Getter
 public class LivroObtido extends Livro{
-
+    @Column(name = "paginas_lidas")
     private Integer pagLidas;
     private EnumStatusLeitura leitura;
 
@@ -25,8 +32,6 @@ public class LivroObtido extends Livro{
         this.leitura = statusLeitura();
         return this;
     }
-
-
 
     public Integer verificaPagLidas(Integer pagLidas, Integer paginas) throws PaginasLidasException {
         if (pagLidas < 0 || pagLidas > paginas) {

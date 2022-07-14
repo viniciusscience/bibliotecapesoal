@@ -39,28 +39,28 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
 
     @Override
     public void cadastrar(LivroObtido livroObtido) {
-        livroObtidoRepository.cadastrar(livroObtido);
+        livroObtidoRepository.save(livroObtido);
     }
 
     @Override
     public LivroObtidoModel editar(LivroObtidoModel model) {
-        LivroObtido livro = this.consultar(id);
+        LivroObtido livro = this.buscarPorId(model.getId());
         livro.editar(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getPagLidas(), model.getAno());
-        return livro;
+        return new LivroObtidoModel(livroObtidoRepository.save(livro));
     }
 
     @Override
     public LivroObtidoModel adicionarPagLidas(UUID id, PagLidasModel model) {
-        LivroObtido livro = this.consultar(id);
+        LivroObtido livro = this.buscarPorId(id);
         livro.acrescentaPaginas(model.getPagLidas());
-        return livro;
+        return new LivroObtidoModel(livroObtidoRepository.save(livro));
     }
 
     @Override
     public LivroObtidoModel excluir(UUID id) {
-        LivroObtido livro = this.consultar(id);
-        livroObtidoRepository.excluir(livro);
-        return livro;
+        LivroObtido livro = this.buscarPorId(id);
+        livroObtidoRepository.delete(livro);
+        return new LivroObtidoModel(livro);
     }
 
     private LivroObtido buscarPorId(UUID id){

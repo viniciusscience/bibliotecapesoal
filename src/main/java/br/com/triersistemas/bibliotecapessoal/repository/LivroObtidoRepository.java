@@ -10,5 +10,6 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface LivroObtidoRepository extends JpaRepository<LivroObtido, UUID> {
+    List<LivroObtido> findByAutorContains(String nome);
 
 }

@@ -1,12 +1,8 @@
 package br.com.triersistemas.bibliotecapessoal.controller;
 
-import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
-import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
 import br.com.triersistemas.bibliotecapessoal.domain.Loja;
-import br.com.triersistemas.bibliotecapessoal.model.ExcluiLojaModel;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
 import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
-import br.com.triersistemas.bibliotecapessoal.model.ModificaLojaModel;
 import br.com.triersistemas.bibliotecapessoal.service.LivroDesejoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,40 +18,45 @@ public class LivroDesejoController {
     private LivroDesejoService livroDesejoService;
 
     @GetMapping("/consultar")
-    public List<LivroDesejo> consultar(){
+    public List<LivroDesejoModel> consultar(){
         return livroDesejoService.consultar();
     }
     @GetMapping("/consultar/{id}")
-    public LivroDesejo consultar(@PathVariable UUID id){
+    public LivroDesejoModel consultar(@PathVariable UUID id){
         return livroDesejoService.consultar(id);
     }
 
+    @GetMapping("/loja-menor-preco/{id}")
+    public LojaModel lojaMenorPreco(@PathVariable UUID id){
+        return livroDesejoService.buscaLojaMenorPreco(id);
+    }
+
     @PostMapping("/cadastrar")
-    public LivroDesejo cadastrar(@RequestBody LivroDesejoModel model){
+    public LivroDesejoModel cadastrar(@RequestBody LivroDesejoModel model){
         return livroDesejoService.cadastrar(model);
     }
-    @PutMapping("/editar/{id}")
-    public LivroDesejo editar(@PathVariable UUID id, @RequestBody LivroDesejoModel model){
-        return livroDesejoService.editar(id, model);
+    @PutMapping("/editar")
+    public LivroDesejoModel editar(@RequestBody LivroDesejoModel model){
+        return livroDesejoService.editar(model);
     }
     @PutMapping("/adicionar-loja/{id}")
-    public LivroDesejo adicionarLoja(@PathVariable UUID id, @RequestBody LojaModel model){
+    public LivroDesejoModel adicionarLoja(@PathVariable UUID id, @RequestBody LojaModel model){
         return livroDesejoService.adicionarLoja(id, model);
     }
     @PutMapping("/modificar-loja/{id}")
-    public LivroDesejo modificarLoja(@PathVariable UUID id, @RequestBody ModificaLojaModel model){
+    public LivroDesejoModel modificarLoja(@PathVariable UUID id, @RequestBody LojaModel model){
         return livroDesejoService.modificarLoja(id, model);
     }
     @DeleteMapping("/excluir-loja/{id}/{idLoja}")
-    public LivroDesejo excluirLoja(@PathVariable UUID id, @PathVariable UUID idLoja){
+    public LivroDesejoModel excluirLoja(@PathVariable UUID id, @PathVariable UUID idLoja){
         return livroDesejoService.excluirLoja(id, idLoja);
     }
     @DeleteMapping("/livro-obtido/{id}")
-    public LivroObtido livroObtido(@PathVariable UUID id){
+    public LivroDesejoModel livroObtido(@PathVariable UUID id){
         return livroDesejoService.livroObtido(id);
     }
     @DeleteMapping("/excluir/{id}")
-    public LivroDesejo excluir(@PathVariable UUID id){
+    public LivroDesejoModel excluir(@PathVariable UUID id){
         return livroDesejoService.excluir(id);
     }
 }

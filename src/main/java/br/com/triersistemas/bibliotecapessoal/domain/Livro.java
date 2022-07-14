@@ -2,12 +2,15 @@ package br.com.triersistemas.bibliotecapessoal.domain;
 
 import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLivroException;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.UUID;
-
+@MappedSuperclass
+@NoArgsConstructor
 @Getter
 public class Livro {
-
+    @Id
     private UUID id;
     private String titulo;
     private String autor;
