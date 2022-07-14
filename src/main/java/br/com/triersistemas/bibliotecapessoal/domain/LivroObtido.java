@@ -4,6 +4,7 @@ import br.com.triersistemas.bibliotecapessoal.enuns.EnumStatusLeitura;
 import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLidasException;
 import br.com.triersistemas.bibliotecapessoal.exceptions.PaginasLivroException;
 import br.com.triersistemas.bibliotecapessoal.helper.StringUtils;
+import br.com.triersistemas.bibliotecapessoal.model.LivroObtidoModel;
 import lombok.Getter;
 
 @Getter

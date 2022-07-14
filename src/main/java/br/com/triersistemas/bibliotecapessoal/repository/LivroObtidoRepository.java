@@ -1,14 +1,14 @@
 package br.com.triersistemas.bibliotecapessoal.repository;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
+import br.com.triersistemas.bibliotecapessoal.model.LivroObtidoModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+@Repository
+public interface LivroObtidoRepository extends JpaRepository<LivroObtido, UUID> {
 
-public interface LivroObtidoRepository {
-    List<LivroObtido> consultar();
-    Optional<LivroObtido> consultar(UUID id);
-    void cadastrar(LivroObtido livro);
-    void excluir(LivroObtido livro);
 }

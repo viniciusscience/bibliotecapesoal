@@ -22,20 +22,19 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
     private LivroObtidoRepository livroObtidoRepository;
 
     @Override
-    public List<LivroObtido> consultar() {
-        return livroObtidoRepository.consultar();
+    public List<LivroObtidoModel> consultar() {
+        return livroObtidoRepository.findAll().stream().map(LivroObtidoModel::new).toList();
     }
 
     @Override
-    public LivroObtido consultar(UUID id) {
-        return livroObtidoRepository.consultar(id).orElseThrow(LivroNaoEncontradoException::new);
+    public LivroObtidoModel consultar(UUID id) {
+        return new LivroObtidoModel(this.buscarPorId(id));
     }
 
     @Override
-    public LivroObtido cadastrar(LivroObtidoModel model) {
+    public LivroObtidoModel cadastrar(LivroObtidoModel model) {
         LivroObtido livro = new LivroObtido(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getPagLidas(), model.getAno());
-        livroObtidoRepository.cadastrar(livro);
-        return livro;
+        return new LivroObtidoModel(livroObtidoRepository.save(livro));
     }
 
     @Override
@@ -44,23 +43,27 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
     }
 
     @Override
-    public LivroObtido editar(UUID id, LivroObtidoModel model) {
+    public LivroObtidoModel editar(LivroObtidoModel model) {
         LivroObtido livro = this.consultar(id);
         livro.editar(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getPagLidas(), model.getAno());
         return livro;
     }
 
     @Override
-    public LivroObtido adicionarPagLidas(UUID id, PagLidasModel model) {
+    public LivroObtidoModel adicionarPagLidas(UUID id, PagLidasModel model) {
         LivroObtido livro = this.consultar(id);
         livro.acrescentaPaginas(model.getPagLidas());
         return livro;
     }
 
     @Override
-    public LivroObtido excluir(UUID id) {
+    public LivroObtidoModel excluir(UUID id) {
         LivroObtido livro = this.consultar(id);
         livroObtidoRepository.excluir(livro);
         return livro;
+    }
+
+    private LivroObtido buscarPorId(UUID id){
+        return livroObtidoRepository.findById(id).orElseThrow(LivroNaoEncontradoException::new);
     }
 }
