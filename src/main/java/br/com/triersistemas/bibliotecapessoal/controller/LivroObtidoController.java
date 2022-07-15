@@ -29,8 +29,8 @@ public class LivroObtidoController {
     }
 
     @GetMapping("/buscar-por-autor")
-    public List<LivroObtidoModel> findByAutorContains(@RequestBody String nome) {
-        return livroObtidoService.findByAutorContains(nome);
+    public List<LivroObtidoModel> findByAutorContains(@RequestBody LivroObtidoModel model) {
+        return livroObtidoService.findByAutorContains(model.getAutor());
     }
 
     @PostMapping("/cadastrar")

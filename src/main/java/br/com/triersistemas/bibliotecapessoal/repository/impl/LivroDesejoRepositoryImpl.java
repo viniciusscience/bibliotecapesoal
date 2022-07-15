@@ -25,6 +25,7 @@ public class LivroDesejoRepositoryImpl implements LivroDesejoRepositoryCustom {
                 .select(livroDesejo)
                 .from(livroDesejo)
                 .where(where)
+
                 .fetch();
     }
     }

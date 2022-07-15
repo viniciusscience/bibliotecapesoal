@@ -32,8 +32,8 @@ public class LivroDesejoController {
     }
 
     @GetMapping("/buscar-por-autor")
-    public List<LivroDesejoModel> lojaMenorPreco(@RequestBody String nome){
-        return livroDesejoService.buscaPorAutor(nome);
+    public List<LivroDesejoModel> lojaMenorPreco(@RequestBody LivroDesejoModel model){
+        return livroDesejoService.buscaPorAutor(model.getAutor());
     }
 
     @GetMapping("/busca-ordem-alfabetica")

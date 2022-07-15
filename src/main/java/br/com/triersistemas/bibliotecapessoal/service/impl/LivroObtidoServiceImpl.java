@@ -33,7 +33,7 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
 
     @Override
     public List<LivroObtidoModel> findByAutorContains(String nome) {
-        return this.livroObtidoRepository.findByAutorContains(nome).stream().map(LivroObtidoModel::new).toList();
+        return this.livroObtidoRepository.findByAutorContainsIgnoreCase(nome).stream().map(LivroObtidoModel::new).toList();
     }
 
     @Override

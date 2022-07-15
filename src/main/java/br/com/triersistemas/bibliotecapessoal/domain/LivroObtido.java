@@ -7,9 +7,7 @@ import br.com.triersistemas.bibliotecapessoal.helper.StringUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "livro_obtido")
@@ -18,6 +16,7 @@ import javax.persistence.Table;
 public class LivroObtido extends Livro{
     @Column(name = "paginas_lidas")
     private Integer pagLidas;
+    @Enumerated(EnumType.STRING)
     private EnumStatusLeitura leitura;
 
     public LivroObtido(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
