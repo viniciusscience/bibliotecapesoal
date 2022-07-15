@@ -31,6 +31,16 @@ public class LivroDesejoController {
         return livroDesejoService.buscaLojaMenorPreco(id);
     }
 
+    @GetMapping("/buscar-por-autor")
+    public List<LivroDesejoModel> lojaMenorPreco(@RequestBody String nome){
+        return livroDesejoService.buscaPorAutor(nome);
+    }
+
+    @GetMapping("/busca-ordem-alfabetica")
+    public List<LivroDesejoModel> buscaOrdemAlfabetica(){
+        return livroDesejoService.buscaPelaOrdemAlfabeticaTituloJPQL();
+    }
+
     @PostMapping("/cadastrar")
     public LivroDesejoModel cadastrar(@RequestBody LivroDesejoModel model){
         return livroDesejoService.cadastrar(model);

@@ -15,6 +15,8 @@ public interface LivroDesejoService {
     LivroDesejoModel consultar(UUID id);
     LivroDesejoModel cadastrar(LivroDesejoModel model);
     LojaModel buscaLojaMenorPreco(UUID id);
+    List<LivroDesejoModel> buscaPorAutor(String nome);
+    List<LivroDesejoModel> buscaPelaOrdemAlfabeticaTituloJPQL();
     LivroDesejoModel editar(LivroDesejoModel model);
     LivroDesejoModel adicionarLoja(UUID id, LojaModel model);
     LivroDesejoModel modificarLoja(UUID id, LojaModel model);

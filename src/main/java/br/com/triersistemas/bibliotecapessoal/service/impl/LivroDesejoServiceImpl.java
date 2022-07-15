@@ -2,13 +2,10 @@ package br.com.triersistemas.bibliotecapessoal.service.impl;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
 import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
-import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.exceptions.LivroNaoEncontradoException;
-import br.com.triersistemas.bibliotecapessoal.exceptions.LojaNaoEcontrada;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
 import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
 import br.com.triersistemas.bibliotecapessoal.repository.LivroDesejoRepository;
-import br.com.triersistemas.bibliotecapessoal.repository.LojaRepository;
 import br.com.triersistemas.bibliotecapessoal.service.LivroDesejoService;
 import br.com.triersistemas.bibliotecapessoal.service.LivroObtidoService;
 import br.com.triersistemas.bibliotecapessoal.service.LojaService;
@@ -30,9 +27,6 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     @Autowired
     private LojaService lojaService;
 
-    @Autowired
-    private LojaRepository lojaRepository;
-
     @Override
     public List<LivroDesejoModel> consultar() {
         return livroDesejoRepository.findAll().stream().map(LivroDesejoModel::new).toList();
@@ -51,7 +45,17 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
 
     @Override
     public LojaModel buscaLojaMenorPreco(UUID id) {
-        return new LojaModel(this.lojaRepository.buscarLojaMenorPreco(id));
+        return new LojaModel(this.lojaService.buscarLojaMenorPreco(id));
+    }
+
+    @Override
+    public List<LivroDesejoModel> buscaPorAutor(String nome) {
+        return this.livroDesejoRepository.ListarPorAutor(nome).stream().map(LivroDesejoModel::new).toList();
+    }
+
+    @Override
+    public List<LivroDesejoModel> buscaPelaOrdemAlfabeticaTituloJPQL() {
+        return this.livroDesejoRepository.buscaPelaOrdemAlfabeticaTituloJPQL().stream().map(LivroDesejoModel::new).toList();
     }
 
     @Override

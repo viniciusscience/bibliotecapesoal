@@ -11,6 +11,6 @@ public interface LojaService {
     Loja adicionarLoja(LivroDesejo livroDesejo, LojaModel model);
     Loja modificarLoja(LojaModel model);
     Loja excluirLoja(UUID idLoja);
-
+    Loja buscarLojaMenorPreco(UUID id);
 
 }

@@ -32,6 +32,11 @@ public class LivroObtidoServiceImpl implements LivroObtidoService {
     }
 
     @Override
+    public List<LivroObtidoModel> findByAutorContains(String nome) {
+        return this.livroObtidoRepository.findByAutorContains(nome).stream().map(LivroObtidoModel::new).toList();
+    }
+
+    @Override
     public LivroObtidoModel cadastrar(LivroObtidoModel model) {
         LivroObtido livro = new LivroObtido(model.getTitulo(), model.getAutor(), model.getPaginas(), model.getPagLidas(), model.getAno());
         return new LivroObtidoModel(livroObtidoRepository.save(livro));

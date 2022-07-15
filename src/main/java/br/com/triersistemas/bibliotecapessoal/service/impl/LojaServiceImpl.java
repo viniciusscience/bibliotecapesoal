@@ -38,6 +38,11 @@ public class LojaServiceImpl implements LojaService {
         return loja;
     }
 
+    @Override
+    public Loja buscarLojaMenorPreco(UUID id) {
+        return this.lojaRepository.buscarLojaMenorPreco(id);
+    }
+
     private Loja buscarPorId(UUID id) {
         return this.lojaRepository.findById(id).orElseThrow(LojaNaoEcontrada::new);
     }

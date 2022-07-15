@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface LivroObtidoService {
     List<LivroObtidoModel> consultar();
     LivroObtidoModel consultar(UUID id);
+    List<LivroObtidoModel> findByAutorContains(String nome);
     LivroObtidoModel cadastrar(LivroObtidoModel model);
     void cadastrar(LivroObtido livroObtido);
     LivroObtidoModel editar(LivroObtidoModel model);
