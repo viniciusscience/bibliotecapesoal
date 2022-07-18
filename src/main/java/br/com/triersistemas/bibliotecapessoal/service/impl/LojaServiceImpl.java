@@ -11,6 +11,7 @@ import br.com.triersistemas.bibliotecapessoal.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +19,11 @@ public class LojaServiceImpl implements LojaService {
 
     @Autowired
     private LojaRepository lojaRepository;
+
+    @Override
+    public List<Loja> consultarLojas(List<Loja> lojas) {
+        return lojaRepository.findAllById(this.buscaIdsLojas(lojas)).stream().toList();
+    }
 
     @Override
     public Loja adicionarLoja(LivroDesejo livroDesejo,LojaModel model) {
@@ -42,6 +48,16 @@ public class LojaServiceImpl implements LojaService {
     public Loja buscarLojaMenorPreco(UUID id) {
         return this.lojaRepository.buscarLojaMenorPreco(id);
     }
+
+    @Override
+    public void excluirLojas(List<Loja> lojas) {
+        this.lojaRepository.deleteAll(lojas);
+    }
+
+    private List<UUID> buscaIdsLojas(List<Loja> lojas) {
+        return lojas.stream().map(Loja::getId).toList();
+    }
+
 
     private Loja buscarPorId(UUID id) {
         return this.lojaRepository.findById(id).orElseThrow(LojaNaoEcontrada::new);

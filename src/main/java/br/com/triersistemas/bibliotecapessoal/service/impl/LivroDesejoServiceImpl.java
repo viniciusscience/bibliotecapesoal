@@ -2,6 +2,7 @@ package br.com.triersistemas.bibliotecapessoal.service.impl;
 
 import br.com.triersistemas.bibliotecapessoal.domain.LivroDesejo;
 import br.com.triersistemas.bibliotecapessoal.domain.LivroObtido;
+import br.com.triersistemas.bibliotecapessoal.domain.Loja;
 import br.com.triersistemas.bibliotecapessoal.exceptions.LivroNaoEncontradoException;
 import br.com.triersistemas.bibliotecapessoal.model.LivroDesejoModel;
 import br.com.triersistemas.bibliotecapessoal.model.LojaModel;
@@ -98,9 +99,13 @@ public class LivroDesejoServiceImpl implements LivroDesejoService {
     @Override
     public LivroDesejoModel excluir(UUID id) {
         LivroDesejo livroDesejo = this.buscaPorId(id);
+        List<Loja> lojas = this.lojaService.consultarLojas(livroDesejo.getLojas());
+        lojaService.excluirLojas(lojas);
         livroDesejoRepository.delete(livroDesejo);
         return new LivroDesejoModel(livroDesejo);
     }
+
+
 
     private LivroDesejo buscaPorId(UUID id) {
         return livroDesejoRepository.findById(id).orElseThrow(LivroNaoEncontradoException::new);
