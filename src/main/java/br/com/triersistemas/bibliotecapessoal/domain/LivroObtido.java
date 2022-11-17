@@ -21,27 +21,30 @@ public class LivroObtido extends Livro{
 
     public LivroObtido(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
         super(titulo, autor, paginas, pagLidas, ano);
-        this.pagLidas = verificaPagLidas(pagLidas, paginas);
+        this.pagLidas = verificaPagLidas(pagLidas, 0, paginas);
         this.leitura = statusLeitura();
     }
 
     public LivroObtido editar(String titulo, String autor, Integer paginas, Integer pagLidas, Integer ano) {
         super.editar(titulo, autor, paginas, pagLidas, ano);
-        this.pagLidas = verificaPagLidas(pagLidas, paginas);
+        this.pagLidas = verificaPagLidas(pagLidas, 0, paginas);
         this.leitura = statusLeitura();
         return this;
     }
 
-    public Integer verificaPagLidas(Integer pagLidas, Integer paginas) throws PaginasLidasException {
-        if (pagLidas < 0 || pagLidas > paginas) {
+    public Integer verificaPagLidas(Integer pagLidas, Integer paginas, Integer pagTotais) throws PaginasLidasException {
+        if (paginas < 0 || paginas > pagTotais || pagLidas > pagTotais) {
             throw new PaginasLidasException();
+        }
+        if (paginas > 0) {
+            return paginas;
         }
         return pagLidas;
     }
 
     public LivroObtido acrescentaPaginas(Integer paginas) {
         if (!(paginas < 0)) {
-            this.pagLidas = verificaPagLidas(this.pagLidas + paginas, this.getPaginas());
+            this.pagLidas = verificaPagLidas(this.getPagLidas(), paginas, this.getPaginas());
             this.leitura = statusLeitura();
         }
         return this;
