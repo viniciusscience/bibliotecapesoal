@@ -58,4 +58,6 @@ public class LivroObtido extends Livro{
     public EnumStatusLeitura statusLeitura() {
         return this.getPaginas().equals(pagLidas) ? EnumStatusLeitura.LIDO : EnumStatusLeitura.LENDO;
     }
+
+
 }

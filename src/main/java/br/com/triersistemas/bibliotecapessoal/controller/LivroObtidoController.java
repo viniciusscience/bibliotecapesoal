@@ -35,6 +35,7 @@ public class LivroObtidoController {
 
     @PostMapping("/cadastrar")
     public LivroObtidoModel cadastrar(@RequestBody LivroObtidoModel model) {
+
         return livroObtidoService.cadastrar(model);
     }
 

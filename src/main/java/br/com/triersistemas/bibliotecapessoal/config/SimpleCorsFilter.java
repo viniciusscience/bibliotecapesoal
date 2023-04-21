@@ -14,28 +14,26 @@ import java.io.IOException;
 public class SimpleCorsFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        final HttpServletResponse response = (HttpServletResponse) res;
-        final HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, content-type, USUARIO-EVT, SENHA-EVT, COD-EVT, x-ijt, tokenSngpc");
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        if (response instanceof HttpServletResponse) {
+            HttpServletResponse r = (HttpServletResponse) response;
+            r.setHeader("Access-Control-Allow-Origin", "*");
+            r.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
+            r.setHeader("Access-Control-Max-Age", "3600");
+            r.setHeader("Access-Control-Allow-Headers", "x-requested-with, , authorization, content-type, USUARIO-EVT, SENHA-EVT, COD-EVT, x-ijt, tokenSngpc");
+            chain.doFilter(request, response);
         } else {
-            chain.doFilter(req, res);
+            throw new ServletException("CORS works only for HTTP");
         }
     }
 
     @Override
-    public void init(FilterConfig filterConfig) {
-        // Do nothing because not used
-    }
-
-    @Override
     public void destroy() {
-        // Do nothing because not used
     }
 
 }
