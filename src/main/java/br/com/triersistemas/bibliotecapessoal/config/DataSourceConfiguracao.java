@@ -11,7 +11,7 @@ public class DataSourceConfiguracao {
 
     @Bean
     public DataSource dataSource(){
-        String url = "jdbc:postgresql://postgres:5432/postgres";
+        String url = "jdbc:postgresql://db:5432/postgres";
         String usuario = "postgres";
         String senha = "myscretpassword";
 
