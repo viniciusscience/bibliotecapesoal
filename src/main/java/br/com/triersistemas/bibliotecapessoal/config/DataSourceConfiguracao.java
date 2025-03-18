@@ -13,7 +13,7 @@ public class DataSourceConfiguracao {
     public DataSource dataSource(){
         String url = "jdbc:postgresql://localhost:5432/biblioteca_pessoal";
         String usuario = "postgres";
-        String senha = "postgres";
+        String senha = "myscretpassword";
 
         return new DriverManagerDataSource(url, usuario, senha);
     }
